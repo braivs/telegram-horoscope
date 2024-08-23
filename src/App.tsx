@@ -7,6 +7,13 @@ import HoroscopeDetail from './components/HoroscopeDetail';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import { getHoroscope } from './services/api';
 
+// Импортируем Telegram Web Apps SDK
+declare global {
+  interface Window {
+    Telegram: any;
+  }
+}
+
 interface ZodiacSign {
   sign: string;
   period: string;
@@ -26,6 +33,28 @@ const App: React.FC = () => {
   const [language, setLanguage] = useState<string>(i18n.language);
 
   useEffect(() => {
+    // Инициализация Telegram WebApp API
+    const tg = window.Telegram.WebApp;
+    tg.expand();
+    const userLang = tg.initDataUnsafe.user?.language_code;
+    if (userLang === 'ru') {
+      i18n.changeLanguage('ru');
+      setLanguage('ru');
+    } else {
+      i18n.changeLanguage('en');
+      setLanguage('en');
+    }
+
+    // Устанавливаем действие на кнопку "Назад"
+    tg.BackButton.show();
+    tg.BackButton.onClick(() => setCurrentSign(null));
+
+    return () => {
+      tg.BackButton.hide();
+    };
+  }, [i18n]);
+
+  useEffect(() => {
     if (currentSign) {
       (async () => {
         const data = await getHoroscope(currentSign, language);
@@ -38,10 +67,6 @@ const App: React.FC = () => {
     setCurrentSign(sign);
   };
 
-  const handleBackClick = () => {
-    setCurrentSign(null);
-  };
-
   return (
     <div className="App">
       <header className="App-header">
@@ -49,7 +74,7 @@ const App: React.FC = () => {
       </header>
       <main>
         {currentSign ? (
-          <HoroscopeDetail description={horoscope} onBack={handleBackClick} />
+          <HoroscopeDetail description={horoscope} onBack={() => setCurrentSign(null)} />
         ) : (
           <div className="zodiac-list">
             {zodiacSigns.map(({ sign, period, icon }) => (
