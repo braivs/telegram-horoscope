@@ -1,18 +1,10 @@
-// src/App.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { useTranslation } from 'react-i18next';
 import ZodiacCard from './components/ZodiacCard';
 import HoroscopeDetail from './components/HoroscopeDetail';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import { getHoroscope } from './services/api';
-
-// Импортируем Telegram Web Apps SDK
-declare global {
-  interface Window {
-    Telegram?: any;
-  }
-}
 
 interface ZodiacSign {
   sign: string;
@@ -34,9 +26,13 @@ const App: React.FC = () => {
 
   useEffect(() => {
     // Проверяем, доступен ли объект Telegram WebApp
-    if (window.Telegram) {
+    if (window.Telegram && window.Telegram.WebApp) {
       const tg = window.Telegram.WebApp;
+
+      // Расширяем приложение, чтобы получить доступ к данным Telegram
       tg.expand();
+
+      // Получаем язык из Telegram и устанавливаем его в приложении
       const userLang = tg.initDataUnsafe.user?.language_code;
       if (userLang === 'ru') {
         i18n.changeLanguage('ru');
@@ -46,7 +42,7 @@ const App: React.FC = () => {
         setLanguage('en');
       }
 
-      // Устанавливаем действие на кнопку "Назад"
+      // Настраиваем кнопку "Назад"
       tg.BackButton.show();
       tg.BackButton.onClick(() => setCurrentSign(null));
 
