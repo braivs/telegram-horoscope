@@ -10,7 +10,7 @@ import { getHoroscope } from './services/api';
 // Импортируем Telegram Web Apps SDK
 declare global {
   interface Window {
-    Telegram: any;
+    Telegram?: any;
   }
 }
 
@@ -33,25 +33,31 @@ const App: React.FC = () => {
   const [language, setLanguage] = useState<string>(i18n.language);
 
   useEffect(() => {
-    // Инициализация Telegram WebApp API
-    const tg = window.Telegram.WebApp;
-    tg.expand();
-    const userLang = tg.initDataUnsafe.user?.language_code;
-    if (userLang === 'ru') {
-      i18n.changeLanguage('ru');
-      setLanguage('ru');
+    // Проверяем, доступен ли объект Telegram WebApp
+    if (window.Telegram) {
+      const tg = window.Telegram.WebApp;
+      tg.expand();
+      const userLang = tg.initDataUnsafe.user?.language_code;
+      if (userLang === 'ru') {
+        i18n.changeLanguage('ru');
+        setLanguage('ru');
+      } else {
+        i18n.changeLanguage('en');
+        setLanguage('en');
+      }
+
+      // Устанавливаем действие на кнопку "Назад"
+      tg.BackButton.show();
+      tg.BackButton.onClick(() => setCurrentSign(null));
+
+      return () => {
+        tg.BackButton.hide();
+      };
     } else {
-      i18n.changeLanguage('en');
+      // Локальный режим: Устанавливаем язык по умолчанию
       setLanguage('en');
+      i18n.changeLanguage('en');
     }
-
-    // Устанавливаем действие на кнопку "Назад"
-    tg.BackButton.show();
-    tg.BackButton.onClick(() => setCurrentSign(null));
-
-    return () => {
-      tg.BackButton.hide();
-    };
   }, [i18n]);
 
   useEffect(() => {
