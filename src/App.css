@@ -1,38 +1,44 @@
-.App {
+/* src/App.css */
+
+.zodiac-card {
+  width: 150px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
   text-align: center;
+  transition: transform 0.2s;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.zodiac-card:hover {
+  transform: scale(1.05);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.zodiac-card img {
+  width: 50px;
+  height: 50px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.horoscope-detail {
+  text-align: left;
+  padding: 20px;
+}
+
+.horoscope-detail p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
   color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button:hover {
+  background-color: #0056b3;
 }
