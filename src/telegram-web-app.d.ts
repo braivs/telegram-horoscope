@@ -22,6 +22,7 @@ interface TelegramWebApp {
   isExpanded: boolean;
   expand(): void;
   close(): void;
+  ready(): void;
   BackButton: {
     show(): void;
     hide(): void;

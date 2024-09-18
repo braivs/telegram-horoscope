@@ -30,6 +30,7 @@ const App: React.FC = () => {
     // Проверяем, доступен ли объект Telegram WebApp
     if (window.Telegram && window.Telegram.WebApp) {
       const tg = window.Telegram.WebApp;
+      tg.ready();
 
       // Расширяем приложение, чтобы получить доступ к данным Telegram
       tg.expand();

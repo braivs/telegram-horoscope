@@ -1,10 +1,7 @@
-# Telegram Horoscope Miniapp
+# Telegram Horoscope Mini App
 
-## Установка
+This is my second **Telegram Mini App** that I made as test task.
 
-Клонируйте репозиторий и установите зависимости:
+## 📲 App Link
 
-```bash
-git clone https://github.com/yourusername/telegram-horoscope.git
-cd telegram-horoscope
-npm install
+You can check out the app [here](https://braivs.github.io/telegram-horoscope/) on Telegram.
