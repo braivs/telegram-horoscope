@@ -8,7 +8,16 @@ const resources = {
       zodiac: {
         aries: 'Aries',
         taurus: 'Taurus',
-        // ... другие знаки
+        gemini: 'Gemini',
+        cancer: 'Cancer',
+        leo: 'Leo',
+        virgo: 'Virgo',
+        libra: 'Libra',
+        scorpio: 'Scorpio',
+        sagittarius: 'Sagittarius',
+        capricorn: 'Capricorn',
+        aquarius: 'Aquarius',
+        pisces: 'Pisces',
       },
       back: 'Back',
       language: 'Language'
@@ -19,13 +28,23 @@ const resources = {
       zodiac: {
         aries: 'Овен',
         taurus: 'Телец',
-        // ... другие знаки
+        gemini: 'Близнецы',
+        cancer: 'Рак',
+        leo: 'Лев',
+        virgo: 'Дева',
+        libra: 'Весы',
+        scorpio: 'Скорпион',
+        sagittarius: 'Стрелец',
+        capricorn: 'Козерог',
+        aquarius: 'Водолей',
+        pisces: 'Рыбы',
       },
       back: 'Назад',
       language: 'Язык'
     },
   },
 };
+
 
 i18n
   .use(initReactI18next)
