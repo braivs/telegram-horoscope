@@ -1,7 +1,7 @@
 // src/services/api.ts
 import axios from 'axios';
 
-const API_URL = 'https://poker247tech.ru/get_horoscope/';
+const API_URL = 'https://api.astrologyapi.com/v1/';
 
 export const getHoroscope = async (sign: string, language: string): Promise<{ description?: string }> => {
   try {

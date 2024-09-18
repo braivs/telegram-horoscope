@@ -5,6 +5,8 @@ import ZodiacCard from './components/ZodiacCard';
 import HoroscopeDetail from './components/HoroscopeDetail';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import { getHoroscope } from './services/api';
+import aries from './icons/aries.png';
+import taurus from './icons/taurus.png';
 
 interface ZodiacSign {
   sign: string;
@@ -13,8 +15,8 @@ interface ZodiacSign {
 }
 
 const zodiacSigns: ZodiacSign[] = [
-  { sign: 'aries', period: 'March 21 - April 19', icon: 'icons/aries.png' },
-  { sign: 'taurus', period: 'April 20 - May 20', icon: 'icons/taurus.png' },
+  { sign: 'aries', period: 'March 21 - April 19', icon: aries },
+  { sign: 'taurus', period: 'April 20 - May 20', icon: taurus },
   // ... другие знаки
 ];
 
