@@ -1,13 +1,24 @@
 /* src/App.css */
 
+.App {
+  padding: 20px;
+  background: bisque;
+  min-height: 100vh;
+}
+
+.zodiac-list {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 5px;
+  padding: 20px;
+  justify-content: center;
+}
+
 .zodiac-card {
-  width: 150px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
   padding: 10px;
-  cursor: pointer;
+  border-radius: 8px;
   text-align: center;
-  transition: transform 0.2s;
+  cursor: pointer;
 }
 
 .zodiac-card:hover {
