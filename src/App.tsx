@@ -79,13 +79,13 @@ const App: React.FC = () => {
       const fetchHoroscope = async () => {
         setHoroscope(''); // Clear previous description when a new sign is selected
         setLoading(true);
-        const data = await getHoroscope(currentSign, language);
+        const data = await getHoroscope(currentSign, i18n.language);
         setHoroscope(data?.description || 'No horoscope available');
         setLoading(false);
       };
       fetchHoroscope();
     }
-  }, [currentSign, language]);
+  }, [currentSign, language, i18n.language]);
 
   const handleSignClick = (sign: string) => {
     setHoroscope('');
