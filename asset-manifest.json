@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/telegram-horoscope/static/css/main.dcc1605c.css",
-    "main.js": "/telegram-horoscope/static/js/main.716c8849.js",
+    "main.css": "/telegram-horoscope/static/css/main.ae2f5505.css",
+    "main.js": "/telegram-horoscope/static/js/main.09e8c1e9.js",
     "index.html": "/telegram-horoscope/index.html",
-    "main.dcc1605c.css.map": "/telegram-horoscope/static/css/main.dcc1605c.css.map",
-    "main.716c8849.js.map": "/telegram-horoscope/static/js/main.716c8849.js.map"
+    "main.ae2f5505.css.map": "/telegram-horoscope/static/css/main.ae2f5505.css.map",
+    "main.09e8c1e9.js.map": "/telegram-horoscope/static/js/main.09e8c1e9.js.map"
   },
   "entrypoints": [
-    "static/css/main.dcc1605c.css",
-    "static/js/main.716c8849.js"
+    "static/css/main.ae2f5505.css",
+    "static/js/main.09e8c1e9.js"
   ]
 }
