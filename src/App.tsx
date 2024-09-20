@@ -69,14 +69,10 @@ const App: React.FC = () => {
       const handleBackButton = () => setCurrentSign(null);
 
       if (currentSign) {
-        // Switch to "Back" button when a sign is selected
-        // tg.MainButton.hide();
         tg.BackButton.show();
         tg.BackButton.onClick(handleBackButton);
       } else {
         tg.BackButton.offClick(handleBackButton);
-        // tg.BackButton.hide();
-        // tg.MainButton.show();
       }
 
       // Cleanup

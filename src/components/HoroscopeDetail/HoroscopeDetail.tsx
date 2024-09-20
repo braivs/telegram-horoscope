@@ -13,11 +13,13 @@ const HoroscopeDetail: React.FC<HoroscopeDetailProps> = ({ description, onBack, 
 
   return (
     <div className={s.component}>
-      {
-        isLoading
-          ? <div className={s.loader}/>
-          : <p>{description}</p>
-      }
+      <div className={s.skeleton}>
+        {
+          isLoading
+            ? <div className={s.loader}/>
+            : <p>{description}</p>
+        }
+      </div>
       <button onClick={onBack}>{t('back')}</button>
     </div>
   );
