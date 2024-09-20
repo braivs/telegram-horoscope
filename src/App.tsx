@@ -17,7 +17,7 @@ import sagittarius from './icons/sagittarius.png';
 import capricorn from './icons/capricorn.png';
 import aquarius from './icons/aquarius.png';
 import pisces from './icons/pisces.png';
-import HoroscopeDetail from "./components/HoroscopeDetail/HoroscopeDetail"
+import HoroscopeDetail from "./components/HoroscopeDetail/HoroscopeDetail";
 
 interface ZodiacSign {
   sign: string;
@@ -62,17 +62,34 @@ const App: React.FC = () => {
         setLanguage('en');
       }
 
-      tg.BackButton.show();
-      tg.BackButton.onClick(() => setCurrentSign(null));
+      // Initially show "Close" button
+      tg.BackButton.hide();
+      // tg.MainButton.setText('Close').show();
 
+      const handleBackButton = () => setCurrentSign(null);
+
+      if (currentSign) {
+        // Switch to "Back" button when a sign is selected
+        // tg.MainButton.hide();
+        tg.BackButton.show();
+        tg.BackButton.onClick(handleBackButton);
+      } else {
+        tg.BackButton.offClick(handleBackButton);
+        // tg.BackButton.hide();
+        // tg.MainButton.show();
+      }
+
+      // Cleanup
       return () => {
         tg.BackButton.hide();
+        tg.BackButton.offClick(handleBackButton);
+        tg.MainButton.hide();
       };
     } else {
       setLanguage('en');
       i18n.changeLanguage('en');
     }
-  }, [i18n]);
+  }, [i18n, currentSign]);
 
   useEffect(() => {
     if (currentSign) {

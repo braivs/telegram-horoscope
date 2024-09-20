@@ -1,3 +1,4 @@
+// telegram-web-app.d.ts
 interface TelegramWebApp {
   initData: string;
   initDataUnsafe: {
@@ -23,10 +24,20 @@ interface TelegramWebApp {
   expand(): void;
   close(): void;
   ready(): void;
+
+  // Определение BackButton с методом offClick
   BackButton: {
     show(): void;
     hide(): void;
     onClick(callback: () => void): void;
+    offClick(callback: () => void): void; // Добавлено для устранения ошибки
+  };
+
+  // Определение MainButton
+  MainButton: {
+    show(): void;
+    hide(): void;
+    setText(text: string): this; // Возвращает 'this', чтобы поддерживать цепочку вызовов
   };
 }
 
