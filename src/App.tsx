@@ -44,8 +44,13 @@ const App: React.FC = () => {
   const { i18n } = useTranslation();
   const [currentSign, setCurrentSign] = useState<string | null>(null);
   const [horoscope, setHoroscope] = useState<string>('');
-  const [language, setLanguage] = useState<string>(i18n.language);
   const [loading, setLoading] = useState<boolean>(false);
+
+  // Инициализация языка из localStorage или значения по умолчанию
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('selectedLanguage') || i18n.language;
+    i18n.changeLanguage(savedLanguage); // Устанавливаем сохранённый язык
+  }, [i18n]);
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
@@ -53,18 +58,13 @@ const App: React.FC = () => {
       tg.ready();
       tg.expand();
 
+      // Устанавливаем язык на основе данных из Telegram или localStorage
       const userLang = tg.initDataUnsafe.user?.language_code;
-      if (userLang === 'ru') {
-        i18n.changeLanguage('ru');
-        setLanguage('ru');
-      } else {
-        i18n.changeLanguage('en');
-        setLanguage('en');
-      }
+      const initialLang = userLang === 'ru' ? 'ru' : 'en';
+      i18n.changeLanguage(localStorage.getItem('selectedLanguage') || initialLang);
 
       // Initially show "Close" button
       tg.BackButton.hide();
-      // tg.MainButton.setText('Close').show();
 
       const handleBackButton = () => setCurrentSign(null);
 
@@ -79,11 +79,11 @@ const App: React.FC = () => {
       return () => {
         tg.BackButton.hide();
         tg.BackButton.offClick(handleBackButton);
-        tg.MainButton.hide();
       };
     } else {
-      setLanguage('en');
-      i18n.changeLanguage('en');
+      // Устанавливаем язык на основе localStorage при отсутствии данных Telegram
+      const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+      i18n.changeLanguage(savedLanguage); // Просто вызываем i18n.changeLanguage без setLanguage
     }
   }, [i18n, currentSign]);
 
@@ -98,12 +98,17 @@ const App: React.FC = () => {
       };
       fetchHoroscope();
     }
-  }, [currentSign, language, i18n.language]);
+  }, [currentSign, i18n.language]);
 
   const handleSignClick = (sign: string) => {
     setHoroscope('');
     setCurrentSign(sign);
   };
+
+  // Сохранение языка при изменении
+  useEffect(() => {
+    localStorage.setItem('selectedLanguage', i18n.language);
+  }, [i18n.language]);
 
   return (
     <div className="App">
